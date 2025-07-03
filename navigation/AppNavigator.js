@@ -1,4 +1,5 @@
 import React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialIcons, FontAwesome } from '@expo/vector-icons';
 
@@ -10,19 +11,20 @@ import TransactionScreen from '../screens/TransactionScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
+const AuthStack = createNativeStackNavigator();
 
-const AppNavigator = () => {
+const AuthNavigator = () => (
+  <AuthStack.Navigator screenOptions={{ headerShown: false }}>
+    <AuthStack.Screen name="Login" component={LoginScreen} />
+    {/* Register, ForgotPassword, dsb kalau ada */}
+  </AuthStack.Navigator>
+);
+
+const MainTab = () => {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       {/* Login screen hidden from tab bar */}
-      <Tab.Screen 
-        name="Login" 
-        component={LoginScreen}
-        options={{
-          tabBarButton: () => null,
-          headerShown: false,
-        }}
-      />
+    
       
       <Tab.Screen
         name="Dashboard"
@@ -72,5 +74,13 @@ const AppNavigator = () => {
     </Tab.Navigator>
   );
 };
+
+const RootStack = createNativeStackNavigator();
+const AppNavigator = () => (
+  <RootStack.Navigator screenOptions={{ headerShown: false }}>
+      <RootStack.Screen name="Auth" component={AuthNavigator} />
+      <RootStack.Screen name="MainTab" component={MainTab} />
+  </RootStack.Navigator>
+);
 
 export default AppNavigator;
