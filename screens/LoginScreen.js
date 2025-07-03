@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import InputField from '../components/InputField';
 import styles from '../styles/loginStyles';
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const insets = useSafeAreaInsets();
 
   return (
@@ -39,8 +39,8 @@ const LoginScreen = () => {
         <Text style={styles.forgot}>Forgot password?</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.loginButton}>
-        <Text style={styles.loginText}>Log in</Text>
+      <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('Dashboard')}>
+          <Text style={styles.loginText}>Log in</Text>
       </TouchableOpacity>
 
       <View style={styles.signupContainer}>
